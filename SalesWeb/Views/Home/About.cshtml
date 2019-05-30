@@ -3,5 +3,10 @@
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
+<h4>@ViewData["address"]</h4>
 
 <p>Use this area to provide additional information.</p>
+<address>
+    <strong>Email:</strong> <a href="mailto:@ViewData["address"]">@ViewData["address"]</a> <br />
+    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
+</address>
