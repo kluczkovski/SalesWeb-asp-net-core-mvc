@@ -13,6 +13,7 @@
   <ItemGroup>
     <Folder Include="Models\ViewModels\" />
     <Folder Include="Views\Departments\" />
+    <Folder Include="Models\Enums\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-Sandstone.min.css" />
