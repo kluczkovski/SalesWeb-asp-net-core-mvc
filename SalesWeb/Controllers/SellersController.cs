@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SalesWeb.Services;
+using SalesWeb.Models;
 
 
 namespace SalesWeb.Controllers
@@ -24,6 +25,21 @@ namespace SalesWeb.Controllers
             var list = _sellerServices.FindAll();
             ViewData["Test"] = "EVerton";
             return View(list);
+        }
+
+        // GET: Crate Seller
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Create Seller
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Seller seller)
+        {
+            _sellerServices.Insert(seller);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
