@@ -16,6 +16,7 @@
     <Folder Include="Models\Enums\" />
     <Folder Include="Data\" />
     <Folder Include="Views\Sellers\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-Sandstone.min.css" />
