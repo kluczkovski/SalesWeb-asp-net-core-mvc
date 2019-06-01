@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SalesWeb.Models;
+using SalesWeb.Data;
 
 
 namespace SalesWeb.Controllers
@@ -42,7 +43,7 @@ namespace SalesWeb.Controllers
                 return NotFound();
             }
 
-            return View();
+            return View(department);
         }
 
 

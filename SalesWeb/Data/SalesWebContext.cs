@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SalesWeb.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace SalesWeb.Models
+namespace SalesWeb.Data
 {
     public class SalesWebContext : DbContext
     {
