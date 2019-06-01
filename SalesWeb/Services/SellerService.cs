@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using SalesWeb.Data;
 using SalesWeb.Models;
 using SalesWeb.Services.Exceptions;
@@ -34,7 +35,10 @@ namespace SalesWeb.Services
 
         public Seller FindById(int id)
         {
-            return _context.Seller.Find(id);
+            //.Include, puts the Department included to join.
+            return _context.Seller.Include(obj => obj.Department).FirstOrDefault(obj => obj.Id == id);
+            //return _context.Seller.Find(id);
+            //return _context.Seller.FirstOrDefault(s=> s.Id == id);
         }
 
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 using SalesWeb.Services;
 using SalesWeb.Models;
 using SalesWeb.Models.ViewModels;
@@ -27,7 +29,6 @@ namespace SalesWeb.Controllers
         public IActionResult Index()
         {
             var list = _sellerService.FindAll();
-            ViewData["Test"] = "EVerton";
             return View(list);
         }
 
@@ -56,13 +57,13 @@ namespace SalesWeb.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
 
             var obj = _sellerService.FindById(id.Value);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not Found" });
             }
 
             return View(obj);
@@ -79,18 +80,36 @@ namespace SalesWeb.Controllers
         }  
 
 
-        //Get: Edit
-        public IActionResult Edit(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
 
             var obj = _sellerService.FindById(id.Value);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not Found" });
+            }
+
+            return View(obj);
+
+        }
+
+
+        //Get: Edit
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
+            }
+
+            var obj = _sellerService.FindById(id.Value);
+            if (obj == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not Found" });
             }
 
             var departments = _departmentService.FindAll();
@@ -106,7 +125,7 @@ namespace SalesWeb.Controllers
         {
             if (id != seller.Id)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id is not equal to Seller" });
             }
 
             try
@@ -114,15 +133,27 @@ namespace SalesWeb.Controllers
                 _sellerService.Update(seller);
                 return RedirectToAction(nameof(Index));
             }
-            catch (NotFoundException ex)
+            catch (NotFoundException e)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), e.Message);
             }
-            catch (DbConcurrencyException)
+            catch (DbConcurrencyException e)
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), e.Message);
             }
          
+        }
+
+
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+
+            return View(viewModel);
         }
 
 
