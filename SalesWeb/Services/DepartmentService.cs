@@ -3,6 +3,8 @@ using System.Linq;
 using System.Collections.Generic;
 using SalesWeb.Models;
 using SalesWeb.Data;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace SalesWeb.Services
 {
@@ -15,9 +17,9 @@ namespace SalesWeb.Services
             _context = salesWebContext;
         }
 
-        public IEnumerable<Department> FindAll()
+        public async Task<IEnumerable<Department>> FindAllAsync()
         {
-            return _context.Department.OrderBy(d => d.Name).ToList();
+            return await _context.Department.OrderBy(d => d.Name).ToListAsync();
         }
 
     }
