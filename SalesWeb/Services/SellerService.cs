@@ -6,11 +6,11 @@ using System.Collections.Generic;
 
 namespace SalesWeb.Services
 {
-    public class SellerServices
+    public class SellerService
     {
         private readonly SalesWebContext _context;
 
-        public SellerServices(SalesWebContext context)
+        public SellerService(SalesWebContext context)
         {
             _context = context;
         }
