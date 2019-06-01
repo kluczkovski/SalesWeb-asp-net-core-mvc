@@ -30,6 +30,7 @@ namespace SalesWeb.Controllers
             return View(list);
         }
 
+
         // GET: Crate Seller
         public IActionResult Create()
         {
@@ -37,6 +38,7 @@ namespace SalesWeb.Controllers
             var viewModel = new SellerFormViewModel { Departments = departments };
             return View(viewModel);
         }
+
 
         // POST: Create Seller
         [HttpPost]
@@ -46,5 +48,33 @@ namespace SalesWeb.Controllers
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
         }
+
+
+        // Get: Delete
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _sellerService.FindById(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
+
+
+        // Post: Delete
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            _sellerService.Remove(id);
+            return RedirectToAction(nameof(Index));
+        }  
     }
 }
