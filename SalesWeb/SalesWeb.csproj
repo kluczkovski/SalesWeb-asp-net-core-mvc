@@ -14,4 +14,11 @@
     <Folder Include="Models\ViewModels\" />
     <Folder Include="Views\Departments\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-Sandstone.min.css" />
+    <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-spacelab.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-spacelab.css" />
+  </ItemGroup>
 </Project>
