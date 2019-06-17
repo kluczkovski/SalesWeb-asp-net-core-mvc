@@ -76,16 +76,23 @@ namespace SalesWeb.Controllers
         }
 
 
-        // Post: Delete
+        //Post: Delete
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            await _sellerService.RemoveAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _sellerService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegrityException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }  
 
-
+        //Get: Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -148,11 +155,11 @@ namespace SalesWeb.Controllers
             }
             catch (NotFoundException e)
             {
-                return RedirectToAction(nameof(Error), e.Message);
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
             catch (DbConcurrencyException e)
             {
-                return RedirectToAction(nameof(Error), e.Message);
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
          
         }

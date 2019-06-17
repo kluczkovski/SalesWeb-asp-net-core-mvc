@@ -18,6 +18,7 @@
     <Folder Include="Views\Sellers\" />
     <Folder Include="Services\" />
     <Folder Include="Services\Exceptions\" />
+    <Folder Include="Views\SalesRecords\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-Sandstone.min.css" />

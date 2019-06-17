@@ -46,6 +46,8 @@ namespace SalesWeb
             services.AddScoped<SeedingService>(); // injection dependency
             services.AddScoped<SellerService>(); // now, this service can be injected in others classes
             services.AddScoped<DepartmentService>();
+            services.AddScoped<SalesRecordService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
